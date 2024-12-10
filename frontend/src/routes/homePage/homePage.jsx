@@ -1,8 +1,13 @@
+import { useCookies } from "react-cookie";
 import SearchBar from "../../components/searchBar/SearchBar";
 import "./homePage.scss";
-
+import Register from "../register/register";
+import Login from "../login/login";
 function HomePage() {
-  return (
+  const [cookies,setCookie,removeCookie]=useCookies()
+  const token=cookies.token
+  return (<div>
+    {token?
     <div className="homePage">
       <div className="textContainer">
         <div className="wrapper">
@@ -33,7 +38,9 @@ function HomePage() {
       <div className="imgContainer">
         <img src="/bg.png" alt="" />
       </div>
-    </div>
+      </div>
+      :<Login/>}
+      </div>
   );
 }
 
