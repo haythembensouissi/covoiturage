@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -55,9 +56,22 @@ public class AuthController {
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setRole(user.getRole());
         userRepository.save(newUser);
+        Authentication authentication= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+        UserDetails userDetails = CUserDetailsService.loadUserByUsername(user.getUsername());
+        String jwt = tokenProvider.
+                generateToken(authentication);
+        Map<String, String> response = new HashMap<>();
+
+        Optional<User> loggedUser=userRepository.findByUsername(user.getUsername());
+        response.put("username", user.getUsername());
+        response.put("email", user.getEmail());
+        response.put("role", user.getRole().toString());
+        response.put("token", jwt);
+        response.put("id", loggedUser.get().getId().toString());
+        return ResponseEntity.ok(response);
 
 
-        return ResponseEntity.ok("User registered successfully");
+
     }
 
     @PostMapping("/signin")
@@ -65,10 +79,15 @@ public class AuthController {
 
         Authentication authentication= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         UserDetails userDetails = CUserDetailsService.loadUserByUsername(loginRequest.getUsername());
+        System.out.println(userDetails);
         String jwt = tokenProvider.
                 generateToken(authentication);
+         Optional<User> loggedUser=userRepository.findByUsername(loginRequest.getUsername());
         Map<String, String> response = new HashMap<>();
+         response.put("role",loggedUser.get().getRole().toString());
+         response.put("id",loggedUser.get().getId().toString());
         response.put("token", jwt);
+
         return ResponseEntity.ok(response);
     }
 

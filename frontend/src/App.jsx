@@ -1,54 +1,71 @@
-import HomePage from "./routes/homePage/homePage";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import ListPage from "./routes/listPage/listPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 import Layout from "./routes/layout/layout";
+import HomePage from "./routes/homePage/homePage";
+import ListPage from "./routes/listPage/listPage";
 import SinglePage from "./routes/singlePage/singlePage";
 import ProfilePage from "./routes/profilePage/profilePage";
 import Login from "./routes/login/login";
 import Register from "./routes/register/register";
+import Contact from "./routes/Contact/Contact";
+import NewPostPage from "./routes/newPostPage/newPostPage";
 
 function App() {
-  const router = createBrowserRouter([
+  const [cookie] = useCookies();
+  const token = cookie.token;
+
+  // Conditional routes for authenticated and unauthenticated users
+  const routes = [
     {
       path: "/",
       element: <Layout />,
-      children:[
+      children: [
         {
-          path:"/",
-          element:<HomePage/>
+          path: "/",
+          element: <HomePage />
         },
         {
-          path:"/list",
-          element:<ListPage/>
+          path: "/list",
+          element: <ListPage />
         },
         {
-          path:"/:id",
-          element:<SinglePage/>
+          path: "/addpost",
+          element: <NewPostPage />
+        },
+
+        {
+          path: "/contact",
+          element: <Contact />
         },
         {
-          path:"/profile",
-          element:<ProfilePage/>
+          path: "/:id",
+          element: <SinglePage />
         },
-        {
-          path:"/login",
-          element:<Login/>
-        },
-        {
-          path:"/register",
-          element:<Register/>
-        }
+        // Protected Route - Only accessible when the user is logged in
+        [
+          {
+            path: "/profile",
+            element: <ProfilePage />
+          }
+        ] ,
+        // Public Routes - Accessible without being logged in
+        ...(!token ? [
+          {
+            path: "/",
+            element: <Login />
+          },
+          {
+            path: "/register",
+            element: <Register />
+          }
+        ] : []),
       ]
     }
-  ]);
+  ];
 
-  return (
+  const router = createBrowserRouter(routes);
 
-    <RouterProvider router={router}/>
-    
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
