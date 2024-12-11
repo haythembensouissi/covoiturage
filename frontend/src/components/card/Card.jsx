@@ -4,27 +4,27 @@ import "./card.scss";
 function Card({ item }) {
   return (
     <div className="card">
-      <Link to={`/${item.id}`} className="imageContainer">
-        <img src={item.img} alt="" />
+      <Link to={`/${item.idRide}`} className="imageContainer">
+        <img src="https://agirpourlatransition.ademe.fr/particuliers/sites/default/files/styles/850x510/public/2023-02/covoiturage-bonnes-raisons.jpg?itok=k3o-2Kya" alt="" />
       </Link>
       <div className="textContainer">
         <h2 className="title">
-          <Link to={`/${item.id}`}>{item.title}</Link>
+          <Link to={`/${item.id}`}>{item.destination}</Link>
         </h2>
         <p className="address">
           <img src="/pin.png" alt="" />
-          <span>{item.address}</span>
+          <span>{item.departureLocation}</span>
         </p>
-        <p className="price">$ {item.price}</p>
+        <p className="price">$ {item.pricePerSeat}</p>
         <div className="bottom">
           <div className="features">
             <div className="feature">
-              <img src="/bed.png" alt="" />
-              <span>{item.bedroom} bedroom</span>
+              
+              <span>{item.restrictions} </span>
             </div>
             <div className="feature">
-              <img src="/bath.png" alt="" />
-              <span>{item.bathroom} bathroom</span>
+
+              <span>{item.availableSeats} seats available</span>
             </div>
           </div>
           <div className="icons">

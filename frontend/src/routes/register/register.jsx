@@ -26,6 +26,7 @@ function Register() {
       setCookie("email",data.email)
       setCookie("role",data.role)
       setCookie("token",data.token)
+      setCookie("id",data.id)
     }
 
     navigate("/")

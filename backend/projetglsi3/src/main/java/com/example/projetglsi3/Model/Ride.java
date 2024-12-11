@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "ride")
 public class Ride {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -94,6 +95,14 @@ public class Ride {
         return driverId;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public void setDriverId(Long driverId) {
         this.driverId = driverId;
     }
@@ -104,6 +113,18 @@ public class Ride {
     private String restrictions;
     private LocalDateTime createdAt, updatedAt;
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     @Column(name = "id", nullable = false)
     private Long driverId;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "img")
+    private String img;
 }
