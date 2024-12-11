@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "./searchBar.scss";
 
-const types = ["buy", "rent"];
+const passengerTypes = ["find car"];
 
-function SearchBar() {
+function SearchBar({ userType }) {
   const [query, setQuery] = useState({
-    type: "buy",
+    type: "find car",
     location: "",
-    minPrice: 0,
+    destination: "",
     maxPrice: 0,
   });
 
@@ -15,10 +15,13 @@ function SearchBar() {
     setQuery((prev) => ({ ...prev, type: val }));
   };
 
+  // Conditionally render the search bar only for passengers
+  if (userType !== "passenger") return null;
+
   return (
     <div className="searchBar">
       <div className="type">
-        {types.map((type) => (
+        {passengerTypes.map((type) => (
           <button
             key={type}
             onClick={() => switchType(type)}
@@ -29,13 +32,23 @@ function SearchBar() {
         ))}
       </div>
       <form>
-        <input type="text" name="location" placeholder="City Location" />
         <input
-          type="number"
-          name="minPrice"
-          min={0}
-          max={10000000}
-          placeholder="Min Price"
+          type="text"
+          name="location"
+          placeholder="Pickup Location"
+          value={query.location}
+          onChange={(e) =>
+            setQuery((prev) => ({ ...prev, location: e.target.value }))
+          }
+        />
+        <input
+          type="text"
+          name="destination"
+          placeholder="Destination"
+          value={query.destination}
+          onChange={(e) =>
+            setQuery((prev) => ({ ...prev, destination: e.target.value }))
+          }
         />
         <input
           type="number"
@@ -43,9 +56,13 @@ function SearchBar() {
           min={0}
           max={10000000}
           placeholder="Max Price"
+          value={query.maxPrice}
+          onChange={(e) =>
+            setQuery((prev) => ({ ...prev, maxPrice: Number(e.target.value) }))
+          }
         />
-        <button>
-          <img src="/search.png" alt="" />
+        <button type="submit">
+          <img src="/search.png" alt="Search" />
         </button>
       </form>
     </div>
