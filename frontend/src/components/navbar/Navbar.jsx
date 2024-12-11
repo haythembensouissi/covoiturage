@@ -1,13 +1,14 @@
 import { useState } from "react";
 import "./navbar.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 function Navbar() {
   const [cookies,setCookie,removeCookie]=useCookies()
+  const navigate=useNavigate()
   const signout=()=>{
     removeCookie("token")
-    window.location.href("/")
+    navigate("/")
   }
   const [open, setOpen] = useState(false);
 const role=cookies.role
@@ -22,7 +23,7 @@ const token=cookies.token
         </a>
         <a href="/">Home</a>
 
-        {role=="RIDER"&&<a href="/addpost">Addpost</a>}
+        {role=="RIDER"?<a href="/addpost">Addpost</a>:role=="PASSENGER"?<a href="/list">View Rides</a>:null}
         <a href="/contact">Contact</a>
         <a href="/">Agents</a>
       </div>
