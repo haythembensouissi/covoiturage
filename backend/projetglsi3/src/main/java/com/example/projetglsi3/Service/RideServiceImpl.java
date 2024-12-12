@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RideServiceImpl implements RideService {
+public abstract class RideServiceImpl implements RideService {
 
     @Autowired
     private RideRepository rideRepository;
@@ -58,7 +58,7 @@ public class RideServiceImpl implements RideService {
     }
 
     @Override
-    public List<Ride> searchRides(String departureLocation, String destination, LocalDateTime departureTime, Double maxPrice) {
+    public List<Ride> searchRides(String departureLocation, String destination, LocalDateTime departureTime, Double maxPrice, Double price) {
         return rideRepository.findByDepartureLocationAndDestinationAndDepartureDateTimeAfterAndPricePerSeatLessThanEqual(
                 departureLocation, destination, departureTime, maxPrice);
     }

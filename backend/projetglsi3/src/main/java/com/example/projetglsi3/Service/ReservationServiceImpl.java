@@ -1,5 +1,4 @@
 package com.example.projetglsi3.Service;
-
 import com.example.projetglsi3.Exception.ResourceNotFoundException;
 import com.example.projetglsi3.Model.Reservation;
 import com.example.projetglsi3.Repository.ReservationRepository;
@@ -61,7 +60,6 @@ public class ReservationServiceImpl implements ReservationService {
             reservationRepository.deleteById(id);
             logger.info("Reservation with id: {} successfully deleted", id);
         } else {
-            throw new ResourceNotFoundException("Reservation not found with id " + id);
         }
     }
 
