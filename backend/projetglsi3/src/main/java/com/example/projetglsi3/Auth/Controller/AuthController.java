@@ -2,10 +2,15 @@ package com.example.projetglsi3.Auth.Controller;
 
 import com.example.projetglsi3.Auth.Security.CUserDetailsService;
 import com.example.projetglsi3.Dto.UserDto;
+import com.example.projetglsi3.Exception.ResourceNotFoundException;
+import com.example.projetglsi3.Model.Ride;
 import com.example.projetglsi3.Model.User;
 import com.example.projetglsi3.Repository.userRepository;
 import com.example.projetglsi3.Auth.Security.JWTTokenProvider;
+import com.example.projetglsi3.Service.ReservationServiceImpl;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,7 +31,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-
+    private static final Logger logger = LoggerFactory.getLogger(userRepository.class);
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
@@ -49,6 +54,7 @@ public class AuthController {
             newUser.setEmail(user.getEmail());
             newUser.setPassword(passwordEncoder.encode(user.getPassword()));
             newUser.setRole(user.getRole());
+            newUser.setImg(user.getImg());
             userRepository.save(newUser);
             Authentication authentication= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
             UserDetails userDetails = CUserDetailsService.loadUserByUsername(user.getUsername());
@@ -60,6 +66,7 @@ public class AuthController {
             response.put("username", user.getUsername());
             response.put("email", user.getEmail());
             response.put("role", user.getRole().toString());
+            response.put("img", user.getImg());
             response.put("token", jwt);
             response.put("id", loggedUser.get().getId().toString());
             return ResponseEntity.ok(response);
@@ -106,4 +113,19 @@ try {
 
 
 }
+    @PostMapping("/updateuser/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        logger.info("Updating reservation with id: {}", id);
+        return userRepository.findById(id)
+                .map(existingUser -> {
+                    logger.info("Found user: {}, updating with new data: {}", existingUser, updatedUser);
+                    existingUser.setId(updatedUser.getId());
+                   existingUser.setEmail(updatedUser.getEmail());
+                   existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+                   existingUser.setUsername(updatedUser.getUsername());
+                    return userRepository.save(existingUser);
+                })
+                .orElseThrow(() -> new ResourceNotFoundException("Reservation not found with id " + id));
+    }
+
 }

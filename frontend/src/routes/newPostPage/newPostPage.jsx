@@ -43,7 +43,13 @@ function NewPostPage() {
     });
 
     if (res.ok) {
-      console.log("Ride created successfully");
+      setAvailableSeats("")
+      setPrice("")
+      setdescription('')
+      setDestination("")
+      setDepartureTime(null)
+      setRestrictions("")
+      setDeparture("")
     } else {
       const errorData = await res.json().catch(() => ({ error: "Unknown error occurred" }));
       console.error("Error creating ride:", errorData);

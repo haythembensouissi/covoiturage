@@ -1,6 +1,8 @@
+import { useState } from "react";
 import "./profileUpdatePage.scss";
 
 function ProfileUpdatePage() {
+  const [username,setUsername]=useState("")
   return (
     <div className="profileUpdatePage">
       <div className="formContainer">
