@@ -1,34 +1,40 @@
+import { useCookies } from "react-cookie";
 import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
 import "./profilePage.scss";
-
-function ProfilePage() {
+import { Link } from "react-router-dom";
+function  ProfilePage() {
+  const [cookies,setCookie,removeCookie]=useCookies()
   return (
     <div className="profilePage">
       <div className="details">
         <div className="wrapper">
           <div className="title">
             <h1>User Information</h1>
+            <Link to="/profileupdate">
             <button>Update Profile</button>
+            </Link>
           </div>
           <div className="info">
             <span>
               Avatar:
               <img
-                src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                src={cookies.image}
                 alt=""
               />
             </span>
             <span>
-              Username: <b>John Doe</b>
+              Username: <b>{cookies.username}</b>
             </span>
             <span>
-              E-mail: <b>john@gmail.com</b>
+              E-mail: <b>{cookies.email}</b>
             </span>
           </div>
           <div className="title">
             <h1>My List</h1>
-            <button>Create New Post</button>
+            <Link to="/addpost" >
+            <button >Create New Post</button>
+            </Link>
           </div>
           <List />
           <div className="title">

@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./navbar.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 function Navbar() {
   const [cookies,setCookie,removeCookie]=useCookies()
   const navigate=useNavigate()
@@ -31,15 +31,17 @@ const token=cookies.token
         {token ? (
           <div className="user">
             <img
-              src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src={cookies.image}
               alt=""
             />
-            <span>John Doe</span>
+            <span>{cookies.username}</span>
             <Link to="/profile" className="profile">
               <div className="notification">3</div>
               <span>Profile</span>
             </Link>
-            <button onClick={signout}>signout</button>
+           <i>
+            <PowerSettingsNewIcon onClick={signout}/>
+            </i>
           </div>
         ) : (
           <>

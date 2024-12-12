@@ -39,6 +39,14 @@ public class User {
         return id;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -80,6 +88,9 @@ public class User {
     @Email
     @Column(unique = true)
     private String email;
+    @Column
+            @Size(max = 500)
+    String img;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 10)

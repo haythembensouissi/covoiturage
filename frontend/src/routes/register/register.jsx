@@ -8,16 +8,38 @@ function Register() {
   const [email,setemail]=useState("")
   const [password,setpassword]=useState("")
   const [role,setrole]=useState("")
+  const[file,setfile]=useState(null)
   const [cookies,setCookie,removeCookie]=useCookies()
   const token=cookies.token
   const navigate=useNavigate()
   const handlesignup=async(e)=>{
+    
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'donaction'); 
+    const response1 = await fetch(
+      `https://api.cloudinary.com/v1_1/de4q2fmk3/image/upload`,
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
+
+    if (response1.ok) {
+      const data = await response1.json();
+      console.log(data)
+   setCookie("image",data.url)
+   
+    } else {
+      console.error('Upload failed');
+    }
+    const image=cookies.image
+    console.log(typeof image)
     const response=await fetch("http://localhost:8080/api/auth/signup",{
       method:"POST",
-      body:JSON.stringify({username,email,password,role}),
+      body:JSON.stringify({username,email,password,role,image}),
       headers:{"Content-Type":"application/json"}
-
       
     })
    const data= await response.json()
@@ -27,9 +49,9 @@ function Register() {
       setCookie("role",data.role)
       setCookie("token",data.token)
       setCookie("id",data.id)
+      navigate("/")
     }
 
-    navigate("/")
   }
   return (
     
@@ -46,7 +68,7 @@ function Register() {
         <option value="PASSENGER">PASSENGER</option>
           
         </select>
-  
+        <input type='file' onChange={(e)=>setfile(e.target.files[0])} placeholder='your file here'/>
           <button onClick={handlesignup}>Register</button>
           <Link to="/">Do you have an account?</Link>
         </form>

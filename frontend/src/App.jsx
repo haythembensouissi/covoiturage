@@ -9,6 +9,7 @@ import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 import Contact from "./routes/Contact/Contact";
 import NewPostPage from "./routes/newPostPage/newPostPage";
+import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
 
 function App() {
   const [cookie] = useCookies();
@@ -41,13 +42,17 @@ function App() {
           path: "/:id",
           element: <SinglePage />
         },
+        {
+          path: "/profileupdate",
+          element: <ProfileUpdatePage />
+        },
         // Protected Route - Only accessible when the user is logged in
-        [
+        
           {
             path: "/profile",
             element: <ProfilePage />
           }
-        ] ,
+         ,
         // Public Routes - Accessible without being logged in
         ...(!token ? [
           {
