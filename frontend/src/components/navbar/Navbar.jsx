@@ -8,6 +8,10 @@ function Navbar() {
   const navigate=useNavigate()
   const signout=()=>{
     removeCookie("token")
+    removeCookie("email")
+    removeCookie("username")
+    removeCookie("id")
+    removeCookie("image")
     navigate("/")
   }
   const [open, setOpen] = useState(false);
