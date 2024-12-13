@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./filter.scss";
+import Card from "../card/Card";
 
-function Filter() {
+function Filter({ data }) {
   const [formData, setFormData] = useState({
     departure: "",
     destination: "",
@@ -11,28 +12,46 @@ function Filter() {
     seats: "",
   });
 
-  const [filteredData, setFilteredData] = useState([]);
+  const [filteredData, setFilteredData] = useState(data);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSearch = () => {
-    const queryParams = new URLSearchParams();
+  useEffect(() => {
+    const filteredRides = data.filter((ride) => {
+      const matchDeparture = formData.departure
+        ? ride.departureLocation.toLowerCase().includes(formData.departure.toLowerCase())
+        : true;
+      const matchDestination = formData.destination
+        ? ride.destination.toLowerCase().includes(formData.destination.toLowerCase())
+        : true;
+      const matchDate = formData.date
+        ? ride.departureDateTime.startsWith(formData.date)
+        : true;
+      const matchMinPrice = formData.minPrice
+        ? ride.price >= parseInt(formData.minPrice)
+        : true;  // Filter by minPrice
+      const matchMaxPrice = formData.maxPrice
+        ? ride.price <= parseInt(formData.maxPrice)
+        : true;  // Filter by maxPrice
+      const matchSeats = formData.seats
+        ? ride.availableSeats >= parseInt(formData.seats)
+        : true;
 
-    if (formData.departure) queryParams.append("departureLocation", formData.departure);
-    if (formData.destination) queryParams.append("destination", formData.destination);
-    if (formData.date) queryParams.append("departureDateTime", formData.date);
-    if (formData.minPrice) queryParams.append("minPrice", formData.minPrice);
-    if (formData.maxPrice) queryParams.append("maxPrice", formData.maxPrice);
-    if (formData.seats) queryParams.append("availableSeats", formData.seats);
+      return (
+        matchDeparture &&
+        matchDestination &&
+        matchDate &&
+        matchMinPrice &&
+        matchMaxPrice &&
+        matchSeats
+      );
+    });
 
-    fetch(`/api/rides/searchRides?${queryParams.toString()}`)
-      .then((response) => response.json())
-      .then((data) => setFilteredData(data))
-      .catch((error) => console.error("Error fetching rides:", error));
-  };
+    setFilteredData(filteredRides);
+  }, [formData, data]);
 
   return (
     <div className="filter">
@@ -105,19 +124,15 @@ function Filter() {
             onChange={handleInputChange}
           />
         </div>
-        <button onClick={handleSearch}>
-          <img src="/search.png" alt="Search" />
-        </button>
       </div>
       <div className="results">
-        {filteredData.map((ride) => (
-          <div key={ride.idRide} className="ride">
-            <h3>{ride.departureLocation} to {ride.destination}</h3>
-            <p>Price: ${ride.pricePerSeat}</p>
-            <p>Seats Available: {ride.availableSeats}</p>
-            <p>Departure Time: {ride.departureDateTime}</p>
-          </div>
-        ))}
+        {filteredData.length === 0 ? (
+          <p>No rides found matching the criteria.</p>
+        ) : (
+          filteredData.map((ride) => (
+            <Card key={ride.idRide} item={ride} />
+          ))
+        )}
       </div>
     </div>
   );

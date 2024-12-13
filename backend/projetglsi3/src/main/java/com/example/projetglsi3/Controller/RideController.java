@@ -29,7 +29,7 @@ public class RideController {
     public List<Ride> getAllRides() {
         List<Ride> rides;
         rides = rideService.getAllRides();
-        if (rides.isEmpty()) {
+        if(rides.isEmpty()){
             System.out.println("No rides found");
         }
         System.out.println("Fetched Rides: " + rides);
@@ -39,7 +39,7 @@ public class RideController {
     @GetMapping("/getRideById/{id}")
     public Ride getRideById(@PathVariable Long id) {
         Ride ride = rideService.getRideById(id);
-        if (ride == null) {
+        if(ride == null){
             System.out.println("Ride not found");
         }
         System.out.println("Fetched Ride: " + ride);
@@ -49,7 +49,7 @@ public class RideController {
     @GetMapping("/getRidesByDriverId/{driverId}")
     public List<Ride> getRidesByDriverId(@PathVariable Long driverId) {
         List<Ride> rides = rideService.getRidesByDriverId(driverId);
-        if (rides.isEmpty()) {
+        if(rides.isEmpty()){
             System.out.println("No rides found");
         }
         System.out.println("Fetched Rides: " + rides);
@@ -59,7 +59,7 @@ public class RideController {
     @PostMapping("/updateRide/{id}")
     public Ride updateRide(@PathVariable Long id, @RequestBody Ride updatedRide) {
         Ride ride = rideService.updateRide(id, updatedRide);
-        if (ride == null) {
+        if(ride == null){
             System.out.println("Ride not found");
         }
         System.out.println("Updated Ride: " + ride);
@@ -78,18 +78,12 @@ public class RideController {
     }
 
     @GetMapping("/searchRides")
-    public List<Ride> searchRides(
-            @RequestParam(required = false) String departureLocation,
-            @RequestParam(required = false) String destination,
-            @RequestParam(required = false) String departureDateTime,
-            @RequestParam(required = false) Double minPrice,
-            @RequestParam(required = false) Double maxPrice,
-            @RequestParam(required = false) Integer availableSeats)
-     {
-         List<Ride> searchRides = rideService.searchRides(departureLocation, destination, departureDateTime, minPrice, maxPrice, availableSeats);
-        if (searchRides.isEmpty()){
+    public List<Ride> searchRides(@RequestParam String departurePoint, @RequestParam String destination, @RequestParam LocalDateTime departureTime, @RequestParam Double maxPrice) {
+        List<Ride> rides = rideService.searchRides(departurePoint, destination, departureTime, maxPrice);
+        if(rides.isEmpty()){
             System.out.println("No rides found");
         }
-        return ResponseEntity.ok(searchRides).getBody();
-     }
+        System.out.println("Fetched Rides: " + rides);
+        return rides;
+    }
 }

@@ -1,58 +1,54 @@
 import { useState } from "react";
 import "./chat.scss";
+import { useCookies } from "react-cookie";
 
 function Chat() {
   const [chat, setChat] = useState(true);
+  const [cookies,setCookie]=useCookies()
   return (
     <div className="chat">
       <div className="messages">
         <h1>Messages</h1>
         <div className="message">
           <img
-            src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            alt=""
+            src={cookies.image}
           />
-          <span>John Doe</span>
+          <span>{cookies.username}</span>
           <p>Lorem ipsum dolor sit amet...</p>
         </div>
         <div className="message">
           <img
-            src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            alt=""
+            src={cookies.image}
           />
-          <span>John Doe</span>
+          <span>{cookies.username}</span>
           <p>Lorem ipsum dolor sit amet...</p>
         </div>
         <div className="message">
           <img
-            src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            alt=""
+            src={cookies.image}
           />
-          <span>John Doe</span>
+          <span>{cookies.username}</span>
           <p>Lorem ipsum dolor sit amet...</p>
         </div>
         <div className="message">
           <img
-            src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            alt=""
+            src={cookies.image}
           />
-          <span>John Doe</span>
+          <span>{cookies.username}</span>
           <p>Lorem ipsum dolor sit amet...</p>
         </div>
         <div className="message">
           <img
-            src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            alt=""
+            src={cookies.image}
           />
-          <span>John Doe</span>
+          <span>{cookies.username}</span>
           <p>Lorem ipsum dolor sit amet...</p>
         </div>
         <div className="message">
           <img
-            src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            alt=""
+            src={cookies.image}
           />
-          <span>John Doe</span>
+          <span>{cookies.username}</span>
           <p>Lorem ipsum dolor sit amet...</p>
         </div>
       </div>
@@ -61,10 +57,9 @@ function Chat() {
           <div className="top">
             <div className="user">
               <img
-                src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                alt=""
+                src={cookies.image}
               />
-              John Doe
+              {cookies.username}
             </div>
             <span className="close" onClick={()=>setChat(null)}>X</span>
           </div>

@@ -9,7 +9,9 @@ import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 import Contact from "./routes/Contact/Contact";
 import NewPostPage from "./routes/newPostPage/newPostPage";
+import Reservation from "./routes/reservation/Reservation"
 import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
+import Reservations from "./components/ReservationCards/Reservations";
 
 function App() {
   const [cookie] = useCookies();
@@ -39,12 +41,20 @@ function App() {
           element: <Contact />
         },
         {
+          path: "/reservation/:id",
+          element: <Reservation />
+        },
+        {
           path: "/:id",
           element: <SinglePage />
         },
         {
           path: "/profileupdate",
           element: <ProfileUpdatePage />
+        },
+        {
+          path: "/reservations",
+          element: <Reservations />
         },
         // Protected Route - Only accessible when the user is logged in
         

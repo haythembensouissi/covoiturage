@@ -27,7 +27,7 @@ public class ReservationController {
     public ResponseEntity<List<Reservation>> getAllReservations() {
         List<Reservation> reservations = reservationService.getAllReservations();
         if (reservations.isEmpty()) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok(reservations);
         }
         return ResponseEntity.ok(reservations);
     }
@@ -58,10 +58,10 @@ public class ReservationController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteReservation(@PathVariable Long id) {
+    public ResponseEntity<String> deleteReservation(@PathVariable Long id) {
         try {
             reservationService.deleteReservation(id);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok("reservation deleted");
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }

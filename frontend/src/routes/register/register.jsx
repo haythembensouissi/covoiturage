@@ -28,17 +28,16 @@ function Register() {
 
     if (response1.ok) {
       const data = await response1.json();
+      setCookie("image",data.url)
       console.log(data)
-   setCookie("image",data.url)
-   
     } else {
       console.error('Upload failed');
     }
-    const image=cookies.image
-    console.log(typeof image)
+    var image=cookies.image
+    
     const response=await fetch("http://localhost:8080/api/auth/signup",{
       method:"POST",
-      body:JSON.stringify({username,email,password,role,image}),
+      body:JSON.stringify({username,email,password,role,img:image}),
       headers:{"Content-Type":"application/json"}
       
     })
@@ -73,9 +72,7 @@ function Register() {
           <Link to="/">Do you have an account?</Link>
         </form>
       </div>
-      <div className="imgContainer">
-        <img src="/bg.png" alt="" />
-      </div>
+      
     </div>
     
     

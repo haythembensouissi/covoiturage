@@ -30,7 +30,9 @@ function Login() {
         setCookie("token",data.token)
         setCookie("role",data.role)
         setCookie("id",data.id)
-        
+        setCookie("username",data.username)
+        setCookie("image",data.img)
+        setCookie("email",data.email)
       }else{
         setError(data.error)
       }
@@ -54,9 +56,7 @@ function Login() {
           <p>{error&&error}</p>
         </form>
       </div>
-      <div className="imgContainer">
-        <img src="/bg.png" alt="" />
-      </div>
+      
     </div>
     
     

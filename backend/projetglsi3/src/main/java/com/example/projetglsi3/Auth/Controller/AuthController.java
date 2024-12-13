@@ -102,7 +102,10 @@ try {
     Optional<User> loggedUser=userRepository.findByUsername(loginRequest.getUsername());
     Map<String, String> response = new HashMap<>();
     response.put("role",loggedUser.get().getRole().toString());
+    response.put("username",loggedUser.get().getUsername().toString());
+    response.put("email",loggedUser.get().getEmail().toString());
     response.put("id",loggedUser.get().getId().toString());
+    response.put("img",loggedUser.get().getImg());
     response.put("token", jwt);
 
     return ResponseEntity.ok(response);

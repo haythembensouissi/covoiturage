@@ -14,6 +14,10 @@ function  ProfilePage() {
             <Link to="/profileupdate">
             <button>Update Profile</button>
             </Link>
+           {cookies.role=="PASSENGER"&& <Link to="/reservations">
+            <button>view reservations</button>
+            </Link>
+  }
           </div>
           <div className="info">
             <span>
@@ -31,16 +35,16 @@ function  ProfilePage() {
             </span>
           </div>
           <div className="title">
+         
             <h1>My List</h1>
-            <Link to="/addpost" >
+          {cookies.role=="RIDER"&&
+          <Link to="/addpost" >
             <button >Create New Post</button>
             </Link>
+          }
           </div>
-          <List />
-          <div className="title">
-            <h1>Saved List</h1>
-          </div>
-          <List />
+
+         <List />
         </div>
       </div>
       <div className="chatContainer">
