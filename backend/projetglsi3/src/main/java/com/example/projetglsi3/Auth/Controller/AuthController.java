@@ -113,19 +113,19 @@ try {
 
 
 }
-    @PostMapping("/updateuser/{id}")
+    @PutMapping("/updateuser/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
-        logger.info("Updating reservation with id: {}", id);
+        logger.info("Updating user with id: {}", id);
         return userRepository.findById(id)
                 .map(existingUser -> {
                     logger.info("Found user: {}, updating with new data: {}", existingUser, updatedUser);
-                    existingUser.setId(updatedUser.getId());
+
                    existingUser.setEmail(updatedUser.getEmail());
                    existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
                    existingUser.setUsername(updatedUser.getUsername());
                     return userRepository.save(existingUser);
                 })
-                .orElseThrow(() -> new ResourceNotFoundException("Reservation not found with id " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("user not found with id " + id));
     }
 
 }
