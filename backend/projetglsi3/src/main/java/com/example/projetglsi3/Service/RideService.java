@@ -15,8 +15,6 @@ public interface RideService {
     void deleteRide(Long id);
     List<Ride> getRidesByDriverId(Long driverId);
     List<Ride> getAllRides();
-    List<Ride> searchRides(String departurePoint, String destination, LocalDateTime departureTime, Double maxPrice, Double price);
+    List<Ride> searchRides(String departurePoint, String destination, LocalDateTime departureTime, Double maxPrice);
     ResponseEntity<?> updateAvailableSeats(Long rideId, int seatsBooked);
-
-    List<Ride> searchRides(String departureLocation, String destination, String departureDateTime, Double minPrice, Double maxPrice, Integer availableSeats);
 }

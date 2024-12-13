@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "./navbar.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 function Navbar() {
+  const [data, setData] = useState([]);
+
+  // Fetch rides data from the backend
+  const fetchData = async () => {
+    const res = await fetch("http://localhost:8080/api/rides/getAllRides");
+    const data = await res.json();
+    setData(data);  // Store the fetched data
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   const [cookies,setCookie,removeCookie]=useCookies()
   const navigate=useNavigate()
   const signout=()=>{
@@ -11,7 +23,10 @@ function Navbar() {
     removeCookie("email")
     removeCookie("username")
     removeCookie("id")
-    removeCookie("image")
+    
+    removeCookie("password")
+    removeCookie("role")
+
     navigate("/")
   }
   const [open, setOpen] = useState(false);
@@ -23,13 +38,13 @@ const token=cookies.token
       <div className="left">
         <a href="/" className="logo">
           <img src="/logo.png" alt="" />
-          <span>LamaEstate</span>
+          <span>Covoiturage</span>
         </a>
         <a href="/">Home</a>
 
         {role=="RIDER"?<a href="/addpost">Addpost</a>:role=="PASSENGER"?<a href="/list">View Rides</a>:null}
-        <a href="/contact">Contact</a>
-        <a href="/">Agents</a>
+      
+       
       </div>
       <div className="right">
         {token ? (
@@ -40,7 +55,7 @@ const token=cookies.token
             />
             <span>{cookies.username}</span>
             <Link to="/profile" className="profile">
-              <div className="notification">3</div>
+              <div className="notification">{data.length}</div>
               <span>Profile</span>
             </Link>
            <i>
@@ -66,7 +81,6 @@ const token=cookies.token
           <a href="/">Home</a>
           <Link to="/About">About</Link>
           <Link to="/contact">Contact</Link>
-          <a href="/">Agents</a>
           <a href="/">Sign in</a>
           <a href="/">Sign up</a>
         </div>

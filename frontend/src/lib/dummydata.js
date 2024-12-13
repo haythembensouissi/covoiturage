@@ -73,8 +73,8 @@ export const listData = [
       bathroom: 1,
       price: 1000,
       address: "112 Piccadilly, London",
-      latitude: 53.3811,
-      longitude: -1.4701,
+      latitude: 36.818187,
+      longitude: 10.139722,
     },
     {
       id: 8,
@@ -84,8 +84,8 @@ export const listData = [
       bathroom: 2,
       price: 1500,
       address: "8765 Main High Street, London",
-      latitude: 51.4545,
-      longitude: -2.5879,
+      latitude: 36.818187,
+      longitude: 10.139722,
     },
   ];
   
@@ -102,8 +102,8 @@ export const listData = [
     bedRooms: 2,
     bathroom: 1,
     size: 861,
-    latitude: 51.5074,
-    longitude: -0.1278,
+    latitude: 36.818187,
+    longitude: 10.139722,
     city: "London",
     address: "1234 Broadway St",
     school: "250m away",
