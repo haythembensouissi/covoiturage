@@ -25,5 +25,8 @@ public class ReviewsService {
     public List<Review> getAllReviews() {
         return reviewsRepository.findAll();
     }
+    public void  deleteReview(Long reviewId) {
+        reviewsRepository.deleteById(reviewId);
+    }
 }
 
