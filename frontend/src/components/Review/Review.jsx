@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./review.scss"; // Create and style this file as needed
 import { useCookies } from "react-cookie";
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 function Review({ itemId }) {
   const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState("");
@@ -17,7 +17,15 @@ function Review({ itemId }) {
   useEffect(() => {
     fetchData();
   }, []);
+const handleDelete= async(id)=>{
+ const res=await fetch(`http://localhost:8080/api/reviews/delete/${id}`,{
+method:"DELETE"
+  })
+  if(res.ok){
 
+    fetchData()
+  }
+}
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch(`http://localhost:8080/api/reviews/create/${itemId}`, {
@@ -47,13 +55,18 @@ function Review({ itemId }) {
   return (
     <div className="reviewSection">
       <div className="reviewList">
-        {reviews.slice(0, visibleReviews).map((review, index) => (
+        {reviews.slice(0, visibleReviews).filter(review=>review.itemId==itemId).map((review, index) => (
           <div key={index} className="review">
-            <img src={review.userimg} alt={review.username} className="userImg" />
-            <div className="reviewContent">
-              <h4>{review.username}</h4>
-              <p>{review.text}</p>
-            </div>
+          <img src={review.userimg} alt={review.username} className="userImg" />
+          {review.userId==cookies.id&&
+            <i className="deleteicon" onClick={()=>handleDelete(review.id)}>  
+            <DeleteForeverIcon />
+            </i>
+          }
+          <div className="reviewContent">
+          <h4>{review.username}</h4>
+          <p>{review.text}</p>
+          </div>
           </div>
         ))}
       </div>

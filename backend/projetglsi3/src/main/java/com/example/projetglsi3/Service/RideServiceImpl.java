@@ -77,4 +77,22 @@ public class RideServiceImpl implements RideService {
         }
         return ResponseEntity.badRequest().build();
     }
+
+    @Override
+    public ResponseEntity<?> hanledeletereservation(Long rideId, int seatsBooked) {
+        Optional<Ride> optionalRide = rideRepository.findById(rideId);
+        if (optionalRide.isPresent()) {
+            Ride ride = optionalRide.get();
+            int availableSeats = ride.getAvailableSeats();
+
+                ride.setAvailableSeats(availableSeats + seatsBooked);
+                rideRepository.save(ride);
+                return ResponseEntity.ok().build();
+
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+
+
 }

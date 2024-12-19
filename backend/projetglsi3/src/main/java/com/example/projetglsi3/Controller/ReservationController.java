@@ -61,6 +61,7 @@ public class ReservationController {
     public ResponseEntity<String> deleteReservation(@PathVariable Long id) {
         try {
             reservationService.deleteReservation(id);
+
             return ResponseEntity.ok("reservation deleted");
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();

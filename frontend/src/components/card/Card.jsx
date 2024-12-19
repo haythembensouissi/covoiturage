@@ -30,7 +30,7 @@ useEffect(()=>{
     <div>
     {item.availableSeats>0&&
     <div className="card">
-      <Link to={`/${item.idRide}`} className="imageContainer">
+      <Link to={`/singlepage/${item.idRide}`} className="imageContainer">
         <img src="https://agirpourlatransition.ademe.fr/particuliers/sites/default/files/styles/850x510/public/2023-02/covoiturage-bonnes-raisons.jpg?itok=k3o-2Kya" alt="" />
       </Link>
       <div className="textContainer">

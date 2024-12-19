@@ -17,4 +17,6 @@ public interface RideService {
     List<Ride> getAllRides();
     List<Ride> searchRides(String departurePoint, String destination, LocalDateTime departureTime, Double maxPrice);
     ResponseEntity<?> updateAvailableSeats(Long rideId, int seatsBooked);
+    ResponseEntity<?> hanledeletereservation(Long rideId, int seatsBooked);
+
 }

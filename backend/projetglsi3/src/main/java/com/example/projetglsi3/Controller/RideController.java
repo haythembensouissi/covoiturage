@@ -86,4 +86,8 @@ public class RideController {
         System.out.println("Fetched Rides: " + rides);
         return rides;
     }
+    @PostMapping("/handlereservationcancelling/{rideId}/{seats}")
+    public ResponseEntity<?> handlereservationCancelling(@PathVariable Long rideId,@PathVariable int seats) {
+        return rideService.hanledeletereservation(rideId, seats);
+    }
 }

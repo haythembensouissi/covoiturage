@@ -130,7 +130,11 @@ function Filter({ data }) {
           <p>No rides found matching the criteria.</p>
         ) : (
           filteredData.map((ride) => (
+            <div>
+            {ride.availableSeats>0&&
             <Card key={ride.idRide} item={ride} />
+          }
+          </div>
           ))
         )}
       </div>
