@@ -10,6 +10,7 @@ import Testimonials from "../../components/testimonials/Testimonials";
 import Workflow from "../../components/WorkFlow/Workflow";
 import covoiturage from "../../assets/covoiturage.png"
 function HomePage() {
+
   const [cookies] = useCookies();
   const token = cookies.token;
 
@@ -50,6 +51,7 @@ function HomePage() {
                   <p>Rides</p>
                 </div>
               </div>
+
             </div>
           </div>
         

@@ -15,11 +15,15 @@ const fetchData=async()=>{
     console.log(data)
     setItem(data)
 }
-const handleDelete=async(id)=>{
+const handleDelete=async(id,idride,places)=>{
+  const res1=await fetch(`http://localhost:8080/api/rides/handlereservationcancelling/${idride}/${places}`,{
+    method:"POST",
+    
+  })
   const res=await fetch(`http://localhost:8080/api/reservations/delete/${id}`,{
     method:"DELETE"
   })
-  if (res.ok){
+  if (res.ok&&res1.ok){
     fetchData()
   }
 }
@@ -29,6 +33,7 @@ useEffect(()=>{
   return (
     <div >
     {items.map((item,key)=>(
+    
       <div className="card">
       
       <div className="textContainer">
@@ -43,7 +48,7 @@ useEffect(()=>{
               <span>{item.restrictions} </span>
             </div>
             
-            <Link onClick={()=>handleDelete(item.id)} className="profile">
+            <Link onClick={()=>handleDelete(item.id,item.rideId,item.places)} className="profile">
               <span>Cancel reservation</span>
             </Link>
           </div>

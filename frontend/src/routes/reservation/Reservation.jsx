@@ -12,6 +12,10 @@ function Reservation() {
 console.log(typeof params.id)
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const confirmed = window.confirm("Are you sure you want to make this reservation?");
+    if (!confirmed) {
+      return; // Exit the function if the user doesn't confirm
+    }
     const parsedReservationDate = new Date(reservationdate).toISOString(); // Ensure date is correctly formatted
     const res1=await fetch(`http://localhost:8080/api/rides/updateAvailableSeats/${params.id}/${places}`,{
       method:"POST",

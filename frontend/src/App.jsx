@@ -45,7 +45,7 @@ function App() {
           element: <Reservation />
         },
         {
-          path: "/:id",
+          path: "/singlepage/:id",
           element: <SinglePage />
         },
         {
