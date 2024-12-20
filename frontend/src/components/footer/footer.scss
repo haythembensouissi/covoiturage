@@ -1,0 +1,45 @@
+// Footer SCSS
+.footer {
+    margin-top: 5rem; // Equivalent to "mt-20"
+    border-top: 1px solid #404040; // Equivalent to "border-neutral-700"
+    padding: 2.5rem 0; // Equivalent to "py-10"
+    color: #d4d4d4; // Neutral gray for text
+  
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem; // Equivalent to "gap-4"
+  
+      @media (min-width: 1024px) {
+        // lg breakpoint
+        grid-template-columns: repeat(3, 1fr); // Equivalent to "lg:grid-cols-3"
+      }
+    }
+  
+    .footer-section {
+      h3 {
+        font-size: 1rem; // Equivalent to "text-md"
+        font-weight: 600; // Equivalent to "font-semibold"
+        margin-bottom: 1rem; // Equivalent to "mb-4"
+      }
+  
+      ul {
+        list-style: none;
+        padding: 0;
+  
+        li {
+          margin-bottom: 0.5rem; // Equivalent to "space-y-2"
+  
+          a {
+            color: #d4d4d4; // Equivalent to "text-neutral-300"
+            text-decoration: none;
+  
+            &:hover {
+              color: #ffffff; // Equivalent to "hover:text-white"
+            }
+          }
+        }
+      }
+    }
+  }
+  

@@ -1,0 +1,82 @@
+// HeroSection.scss
+
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5rem;
+  
+    @media (min-width: 1024px) {
+      margin-top: 5rem; // Equivalent to "lg:mt-20"
+    }
+  
+    h1 {
+      font-size: 2.25rem; // Equivalent to "text-4xl"
+      text-align: center;
+      letter-spacing: 0.05em; // Tailwind's tracking-wide
+  
+      @media (min-width: 640px) {
+        font-size: 3.75rem; // "sm:text-6xl"
+      }
+  
+      @media (min-width: 1024px) {
+        font-size: 4.5rem; // "lg:text-7xl"
+      }
+  
+      .gradient-text {
+        background: linear-gradient(to right, #f97316, #7f1d1d); // Equivalent to "bg-gradient-to-r from-orange-500 to-red-800"
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  
+    p {
+      margin-top: 2.5rem; // "mt-10"
+      font-size: 1.125rem; // "text-lg"
+      text-align: center;
+      color: #737373; // "text-neutral-500"
+      max-width: 64rem; // "max-w-4xl"
+    }
+  
+    .buttons {
+      display: flex;
+      justify-content: center;
+      margin: 2.5rem 0; // "my-10"
+  
+      a {
+        padding: 0.75rem 1rem; // "py-3 px-4"
+        margin: 0 0.75rem; // "mx-3"
+        border-radius: 0.375rem; // "rounded-md"
+        text-decoration: none;
+        color: #fff;
+  
+        &.primary {
+          background: linear-gradient(to right, #f97316, #c2410c); // "from-orange-500 to-orange-800"
+        }
+  
+        &.secondary {
+          border: 1px solid #d4d4d4; // "border"
+          color: #333; // Default text color
+        }
+      }
+    }
+  
+    .videos {
+      display: flex;
+      justify-content: center;
+      margin-top: 2.5rem; // "mt-10"
+  
+      video {
+        border-radius: 0.5rem; // "rounded-lg"
+        width: 50%; // "w-1/2"
+        border: 1px solid #b45309; // "border-orange-700"
+        box-shadow: 0 1px 5px #fb923c; // "shadow-sm shadow-orange-400"
+        margin: 0.5rem; // "mx-2 my-4"
+  
+        @media (max-width: 768px) {
+          width: 100%; // Full width for smaller screens
+        }
+      }
+    }
+  }
+  

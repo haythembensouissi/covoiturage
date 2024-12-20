@@ -1,61 +1,88 @@
 .login {
-  height: 100%;
   display: flex;
+  height: 100vh;
 
-  .formContainer {
-    flex: 3;
-    height: 100%;
+  .imageContainer {
+    flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #f9f9f9;
+    padding: 20px;
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+    img {
+      width: 70%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
 
-      input{
-        padding: 20px;
-        border: 1px solid gray;
-        border-radius: 5px;
-      }
-
-      button{
-        padding: 20px;
-        border-radius: 5px;
-        border: none;
-        background-color: teal;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-
-        &:disabled{
-          background-color: #BED9D8;
-          cursor: not-allowed;
-        }
-      }
-
-      span{
-        color: rgba(255, 0, 0, 0.591);
-      }
-
-      a{
-        font-size: 14px;
-        color: gray;
-        border-bottom: 1px solid gray;
-        width: max-content;
-      }
+    .title {
+      font-size: 2.5rem;
+      color: #333;
+      text-align: center;
+      font-weight: bold;
     }
   }
 
-  .imgContainer {
-    flex: 2;
-    background-color: #fcf5f3;
+  .formContainer {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    img {
-      width: 100%;
+    background-color: #fff;
+
+    form {
+      width: 80%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      h1 {
+        text-align: center;
+        color: #333;
+        font-size: 1.8rem;
+      }
+
+      input {
+        padding: 15px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        padding: 15px;
+        font-size: 1rem;
+        background-color: teal;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: darkslategray;
+        }
+      }
+
+      a {
+        text-align: center;
+        color: teal;
+        font-size: 0.9rem;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      p {
+        text-align: center;
+        color: red;
+        font-size: 0.9rem;
+      }
     }
   }
 }

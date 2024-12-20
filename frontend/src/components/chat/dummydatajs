@@ -1,0 +1,18 @@
+export const rideData = [
+    {
+      id: 1,
+      rider: "John Doe",
+      riderImage: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      driver: "Jane Smith",
+      driverImage: "https://images.pexels.com/photos/91228/pexels-photo-91228.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      passenger: "Alex Johnson",
+      passengerImage: "https://images.pexels.com/photos/91229/pexels-photo-91229.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      messages: [
+        { sender: "Alex Johnson", message: "Hi, can you pick me up at 5 PM?", own: false },
+        { sender: "John Doe", message: "Sure, I will be there.", own: true },
+        { sender: "Alex Johnson", message: "Thanks!", own: false },
+        { sender: "John Doe", message: "You're welcome!", own: true },
+      ],
+    },
+  ];
+  

@@ -1,82 +1,105 @@
 @import "../../responsive.scss";
-
 .homePage {
+  max-height: 100vh; /* Restrict to viewport height */
+  overflow-y: scroll; /* Always show vertical scrollbar */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  scroll-behavior: smooth; /* Smooth scrolling effect */
+  padding-right: 10px; /* Adjust spacing to avoid content cutting off */
   display: flex;
-  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 
+  // Main Text Section
   .textContainer {
-    flex: 3;
+    width: 100%;
+    max-width: 1200px;
+    padding: 2rem 1rem;
 
     .wrapper {
-      padding-right: 100px;
+      text-align: center;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      gap: 50px;
-      height: 100%;
-
-      @include lg{
-        padding-right: 50px;
-      }
-
-      @include md{
-        padding: 0;
-      }
-
-      @include sm{
-        justify-content: flex-start;
-      }
+      align-items: center;
+      gap: 2rem;
 
       .title {
-        font-size: 64px;
+        font-size: 3rem;
+        font-weight: bold;
+        color: #333;
 
-        @include lg {
-          font-size: 48px;
+        @include md {
+          font-size: 2.5rem;
+        }
+        @include sm {
+          font-size: 2rem;
         }
       }
 
+      .description {
+        color: #555;
+        font-size: 1rem;
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      // Statistics Boxes
       .boxes {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
+        gap: 1rem;
+        flex-wrap: wrap;
 
-        @include sm {
-          display: none;
-        }
+        .box {
+          background: #ff6b6b;
+          color: white;
+          border-radius: 12px;
+          padding: 1.5rem;
+          width: 200px;
+          text-align: center;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-        h1 {
-          font-size: 36px;
-
-          @include lg {
-            font-size: 32px;
+          .statNumber {
+            font-size: 2.5rem;
+            font-weight: bold;
           }
-        }
 
-        h2 {
-          font-size: 20px;
-          font-weight: 300;
+          p {
+            margin-top: 0.5rem;
+            font-size: 1rem;
+          }
         }
       }
     }
   }
 
-  .imgContainer {
-    flex: 2;
-    background-color: #fcf5f3;
-    position: relative;
-    display: flex;
-    align-items: center;
+  // Section for Hero, Pricing, Testimonials, Workflow
+  .section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 1rem;
 
-    @include md {
-      display: none;
+    &:not(:last-child) {
+      margin-bottom: 2rem;
     }
+  }
 
-    img {
-      width: 115%;
-      position: absolute;
-      right: 0;
+  // Footer Styling
+  footer {
+    width: 100%;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
 
-      @include lg {
-        width: 105%;
+    a {
+      color: #ffa07a;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
       }
     }
   }

@@ -1,0 +1,77 @@
+.testimonials {
+    margin-top: 5rem; // Equivalent à "mt-20"
+    text-align: center;
+    font-family: 'Arial', sans-serif; // Exemple de typographie
+    line-height: 1.6; // Amélioration de la lisibilité
+  
+    .title {
+      font-size: 2rem; // Equivalent à "text-3xl"
+      margin: 2.5rem 0; // "my-10"
+  
+      @media (min-width: 640px) {
+        font-size: 3rem; // "sm:text-5xl"
+      }
+  
+      @media (min-width: 1024px) {
+        font-size: 4rem; // "lg:text-6xl"
+        margin: 5rem 0; // "lg:my-20"
+      }
+    }
+  
+    .testimonials-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    .testimonial-card {
+      width: 100%; // "w-full"
+      padding: 1rem; // "px-4 py-2"
+  
+      @media (min-width: 640px) {
+        width: 50%; // "sm:w-1/2"
+      }
+  
+      @media (min-width: 1024px) {
+        width: 33.333%; // "lg:w-1/3"
+      }
+    }
+  
+    .testimonial-content {
+      background-color: #212121; // Equivalent à "bg-neutral-900"
+      border: 1px solid #2a2a2a; // "border-neutral-800"
+      border-radius: 8px; // "rounded-md"
+      padding: 1.5rem; // "p-6"
+      font-size: 0.875rem; // "text-md"
+      font-weight: 300; // "font-thin"
+      color: #e0e0e0; // Texte clair
+    }
+  
+    .user-info {
+      display: flex;
+      align-items: center;
+      margin-top: 2rem; // "mt-8"
+  
+      .user-image {
+        width: 3rem; // "w-12"
+        height: 3rem; // "h-12"
+        margin-right: 1.5rem; // "mr-6"
+        border-radius: 50%; // "rounded-full"
+        border: 1px solid #d4d4d4; // "border-neutral-300"
+      }
+  
+      .user-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #fff;
+      }
+  
+      .user-company {
+        font-size: 0.875rem; // Equivalent à "text-sm"
+        font-style: italic; // "italic"
+        font-weight: 400; // "font-normal"
+        color: #888; // "text-neutral-600"
+      }
+    }
+  }
+  
