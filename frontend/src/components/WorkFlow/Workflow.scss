@@ -1,0 +1,85 @@
+.workflow {
+    margin-top: 5rem; // Equivalent to "mt-20"
+    text-align: center;
+  
+    .workflow-title {
+      font-size: 2rem; // "text-3xl"
+      margin-top: 1.5rem; // "mt-6"
+      letter-spacing: 0.05em; // "tracking-wide"
+  
+      @media (min-width: 640px) {
+        font-size: 3rem; // "sm:text-5xl"
+      }
+  
+      @media (min-width: 1024px) {
+        font-size: 4rem; // "lg:text-6xl"
+      }
+  
+      .gradient-text {
+        background: linear-gradient(to right, #f97316, #c2410c); // "from-orange-500 to-orange-800"
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  
+    .workflow-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2rem; // Space below title
+  
+      .workflow-image {
+        padding: 0.5rem; // "p-2"
+        width: 100%; // "w-full"
+        justify-content: space-between;  
+        @media (min-width: 1024px) {
+          width: 50%; // "lg:w-1/2"
+        }
+  
+        img {
+          width: 100%;
+          border-radius: 8px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+      }
+  
+      .workflow-checklist {
+        padding-top: 3rem; // "pt-12"
+        width: 100%; // "w-full"
+  
+        @media (min-width: 1024px) {
+          width: 50%; // "lg:w-1/2"
+        }
+  
+        .checklist-item {
+          display: flex;
+          margin-bottom: 3rem; // "mb-12"
+          align-items: flex-start;
+  
+          .icon-container {
+            color: #22c55e; // Equivalent to "text-green-400"
+            background-color: #212121; // "bg-neutral-900"
+            height: 2.5rem; // "h-10"
+            width: 2.5rem; // "w-10"
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%; // "rounded-full"
+            padding: 0.5rem; // "p-2"
+            margin-right: 1.5rem; // "mx-6"
+          }
+  
+          .checklist-title {
+            margin: 0.25rem 0; // "mt-1 mb-2"
+            font-size: 1.25rem; // "text-xl"
+          }
+  
+          .checklist-description {
+            font-size: 1rem; // "text-md"
+            color: #737373; // "text-neutral-500"
+          }
+        }
+      }
+    }
+  }
+  

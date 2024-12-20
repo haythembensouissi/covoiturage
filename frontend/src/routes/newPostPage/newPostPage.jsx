@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
+import Map from "../../components/map/Map";
 import "./newPostPage.scss";
 
 function NewPostPage() {
@@ -8,48 +9,83 @@ function NewPostPage() {
   const [departureTime, setDepartureTime] = useState("");
   const [restrictions, setRestrictions] = useState("");
   const [availableSeats, setAvailableSeats] = useState("");
-  const [description, setdescription] = useState("");
+  const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [pins, setPins] = useState([]); // State for pins
   const [cookies] = useCookies();
   const driverId = cookies.role === "RIDER" ? cookies.id : null;
+
+  const handleGeocode = async (place) => {
+    try {
+      const response = await fetch(
+        `https://api.opencagedata.com/geocode/v1/json?q=${place}&key=YOUR_API_KEY`
+      );
+      const data = await response.json();
+      if (data.results.length > 0) {
+        const { lat, lng } = data.results[0].geometry;
+        return { lat, lon: lng };
+      }
+    } catch (error) {
+      console.error("Geocoding error:", error);
+    }
+    return null;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const createdAt =new Date(Date.now());
+    const createdAt = new Date(Date.now());
     const updatedAt = new Date(Date.now());
-    const departureDateTime=new Date(departureTime);
-    const img="https://agirpourlatransition.ademe.fr/particuliers/sites/default/files/styles/850x510/public/2023-02/covoiturage-bonnes-raisons.jpg?itok=k3o-2Kya"
-    console.log(departureDateTime)
-    console.log(createdAt)
-    console.log(updatedAt)
+    const departureDateTime = new Date(departureTime);
+    const img =
+      "https://agirpourlatransition.ademe.fr/particuliers/sites/default/files/styles/850x510/public/2023-02/covoiturage-bonnes-raisons.jpg?itok=k3o-2Kya";
+
+    const coords = await handleGeocode(destination);
+
+    if (coords) {
+      // Update pins state with new pin
+      const newPin = {
+        id: Date.now(),
+        lat: coords.lat,
+        lon: coords.lon,
+        img,
+        destination,
+        departure,
+        departureTime,
+        availableSeats,
+        description,
+        price,
+        restrictions,
+      };
+      setPins([...pins, newPin]);
+    }
+
     const res = await fetch("http://localhost:8080/api/rides/createRide", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         availableSeats,
-        pricePerSeat:price,
+        pricePerSeat: price,
         driverId,
         createdAt,
-       destination,
+        destination,
         departureDateTime,
-       departureLocation:departure,
+        departureLocation: departure,
         description,
         updatedAt,
         img,
-        restrictions
-        
+        restrictions,
       }),
     });
 
     if (res.ok) {
-      setAvailableSeats("")
-      setPrice("")
-      setdescription('')
-      setDestination("")
-      setDepartureTime(null)
-      setRestrictions("")
-      setDeparture("")
+      setAvailableSeats("");
+      setPrice("");
+      setDescription("");
+      setDestination("");
+      setDepartureTime(null);
+      setRestrictions("");
+      setDeparture("");
     } else {
       const errorData = await res.json().catch(() => ({ error: "Unknown error occurred" }));
       console.error("Error creating ride:", errorData);
@@ -110,14 +146,15 @@ function NewPostPage() {
               />
             </div>
             <div className="item">
-            <label htmlFor="restrictions">Description</label>
-            <input
-              id="description"
-              value={description}
-              onChange={(e) => setdescription(e.target.value)}
-              type="textarea" maxLength={90} 
-            />
-          </div>
+              <label htmlFor="description">Description</label>
+              <input
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                type="textarea"
+                maxLength={90}
+              />
+            </div>
             <div className="item">
               <label htmlFor="restrictions">Restrictions</label>
               <input
@@ -127,14 +164,15 @@ function NewPostPage() {
                 type="text"
               />
             </div>
-           
             <button className="sendButton" type="submit">
               Add
             </button>
           </form>
         </div>
       </div>
-      <div className="sideContainer"></div>
+      <div className="sideContainer">
+        <Map items={pins} />
+      </div>
     </div>
   );
 }
