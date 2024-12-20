@@ -23,10 +23,8 @@ function Navbar() {
     removeCookie("email")
     removeCookie("username")
     removeCookie("id")
-    
     removeCookie("password")
     removeCookie("role")
-
     navigate("/")
   }
   const [open, setOpen] = useState(false);

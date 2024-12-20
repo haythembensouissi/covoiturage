@@ -31,13 +31,13 @@ function Filter({ data }) {
         ? ride.departureDateTime.startsWith(formData.date)
         : true;
       const matchMinPrice = formData.minPrice
-        ? ride.price >= parseInt(formData.minPrice)
+        ? ride.price == parseInt(formData.minPrice)
         : true;  // Filter by minPrice
       const matchMaxPrice = formData.maxPrice
-        ? ride.price <= parseInt(formData.maxPrice)
+        ? ride.price == parseInt(formData.maxPrice)
         : true;  // Filter by maxPrice
       const matchSeats = formData.seats
-        ? ride.availableSeats >= parseInt(formData.seats)
+        ? ride.availableSeats == parseInt(formData.seats)
         : true;
 
       return (
